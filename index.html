@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .display {
+            width: 200px;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 50px);
+            grid-gap: 10px;
+        }
+
+        button {
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            border: none;
+            background-color: #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #bbb;
+        }
+
+        button.operator {
+            background-color: #f59042;
+            color: white;
+        }
+
+        button.operator:hover {
+            background-color: #ff704d;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <input type="text" class="display" id="display" disabled>
+
+        <div class="buttons">
+            <button onclick="clearDisplay()">MC</button>
+            <button onclick="memoryAdd()">M+</button>
+            <button onclick="insert('+')" class="operator">+</button>
+            <button onclick="insert('-')" class="operator">-</button>
+
+            <button onclick="insert('7')">7</button>
+            <button onclick="insert('8')">8</button>
+            <button onclick="insert('9')">9</button>
+            <button onclick="insert('*')" class="operator">×</button>
+
+            <button onclick="insert('4')">4</button>
+            <button onclick="insert('5')">5</button>
+            <button onclick="insert('6')">6</button>
+            <button onclick="insert('/')" class="operator">÷</button>
+
+            <button onclick="insert('1')">1</button>
+            <button onclick="insert('2')">2</button>
+            <button onclick="insert('3')">3</button>
+            <button onclick="calculate()" class="operator">=</button>
+
+            <button onclick="insert('0')">0</button>
+            <button onclick="insert('.')">.</button>
+        </div>
+    </div>
+
+    <script>
+        let memory = 0;
+
+        function insert(value) {
+            document.getElementById("display").value += value;
+        }
+        function clearDisplay() {
+            document.getElementById("display").value = '';
+        }
+
+        function calculate() {
+            try {
+                let result = eval(document.getElementById("display").value);
+                document.getElementById("display").value = result;
+            } catch (e) {
+                document.getElementById("display").value = "Error";
+            }
+        }
+
+        function memoryAdd() {
+            let currentDisplay = document.getElementById("display").value;
+            memory += parseFloat(currentDisplay) || 0;
+            clearDisplay();
+        }
+    </script>
+
+</body>
+</html>
